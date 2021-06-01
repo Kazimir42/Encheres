@@ -12,7 +12,7 @@ public class Utilisateur {
 	private String ville;
 	private String motDePasse;
 	private int credit;
-	private boolean administrateur;
+	private byte administrateur;
 	
 	
 	public Utilisateur() {
@@ -20,7 +20,7 @@ public class Utilisateur {
 	}
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
-			String rue, int codePostal, String ville, String motDePasse, int credit) {
+			String rue, int codePostal, String ville, String motDePasse, int credit, byte administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -33,6 +33,7 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.credit = credit;
+		this.administrateur = administrateur;
 	}
 	
 	public int getNoUtilisateur() {
@@ -123,11 +124,11 @@ public class Utilisateur {
 		this.credit = credit;
 	}
 	
-	public boolean isAdministrateur() {
+	public byte isAdministrateur() {
 		return administrateur;
 	}
 	
-	public void setAdministrateur(boolean administrateur) {
+	public void setAdministrateur(byte administrateur) {
 		this.administrateur = administrateur;
 	}
 	
