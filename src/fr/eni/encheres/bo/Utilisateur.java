@@ -14,7 +14,11 @@ public class Utilisateur {
 	private int credit;
 	private byte administrateur;
 	
+	private String error = "";
 	
+	
+
+
 	public Utilisateur() {
 		
 	}
@@ -132,12 +136,37 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+	
+	public boolean isValide() {
+		boolean validite;
+		
+		if (pseudo.isBlank() || nom.isBlank() || prenom.isBlank() || email.isBlank() || telephone == 0 || rue.isBlank() || codePostal == 0 || ville.isBlank() || motDePasse.isBlank()) {
+			validite = false;
+			System.out.println("isValide est PAS OK");
+		}else {
+			validite = true;
+			System.out.println("isValide est OK");
+
+		}
+		
+		return validite;
+	}
+
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + "]";
+				+ ", administrateur=" + administrateur + ", error=" + error + "]";
 	}
 	
+	
+
 }

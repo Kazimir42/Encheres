@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:choose>
-    <c:when test="${ noUtilisateur > 0 }">
+    <c:when test="${ utilisateur.noUtilisateur > 0 }">
     	<ul>
     		<li><a href="/Encheres/encheres">Encheres</a></li>
     		<li><a href="/Encheres/vente">Vendre un article</a></li>

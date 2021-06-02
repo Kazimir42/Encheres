@@ -47,11 +47,11 @@ public class Connexion extends HttpServlet {
         request.setAttribute("mdp", currentUtilisateur.getMotDePasse());
         */
 		
-		session.setAttribute("noUtilisateur", currentUtilisateur.getNoUtilisateur());
+		session.setAttribute("utilisateur", currentUtilisateur);
         
 		
 		if (currentUtilisateur.getNoUtilisateur() > 0) {
-			response.sendRedirect("/Encheres/index");  
+			response.sendRedirect("/Encheres/");  
 
 	        //this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}else {

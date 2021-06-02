@@ -6,5 +6,11 @@ import fr.eni.encheres.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 
-	public Utilisateur selectUtilisateur(Utilisateur user) throws SQLException;
+	public Utilisateur selectUtilisateurByPseudoAndPassword(Utilisateur user) throws SQLException;
+	
+	public boolean checkPseudoUtilisateurDispo(Utilisateur user) throws SQLException;
+
+	public Utilisateur InsertUtilisateur(Utilisateur user) throws SQLException;
+	
+	
 }

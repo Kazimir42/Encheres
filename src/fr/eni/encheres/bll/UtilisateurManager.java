@@ -22,12 +22,22 @@ public class UtilisateurManager {
 	
 		try {
 			
-			currentUtilisateur = this.utilisateurDAO.selectUtilisateur(currentUtilisateur);
+			currentUtilisateur = this.utilisateurDAO.selectUtilisateurByPseudoAndPassword(currentUtilisateur);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return currentUtilisateur;
+	}
+	
+	
+	public Utilisateur ajouter(Utilisateur user) {
+
+		try {
+			user = this.utilisateurDAO.InsertUtilisateur(user);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 	
 }
