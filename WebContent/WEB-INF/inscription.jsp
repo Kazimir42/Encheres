@@ -6,8 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Inscription</title>
+    <link rel="stylesheet" href="css/style.css" />
+	<meta charset="UTF-8">
+	<title>Inscription</title>
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
@@ -50,7 +51,7 @@
             <label for="mdp">Mot de passe : </label>
             <input type="password" name="mdp" id="mdp" />
         </p>
-         <p>
+        <p>
             <label for="confirmation">Confirmation : </label>
             <input type="password" name="confirmation" id="confirmation" />
         </p>
@@ -62,7 +63,7 @@
         </form>
                         
         <c:if test="${!empty error}">
-			<p>${error}</p>
+			<p class="incorrect">${error}</p>
         </c:if>
 </body>
 </html>

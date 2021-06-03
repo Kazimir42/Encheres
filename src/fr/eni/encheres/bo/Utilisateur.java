@@ -128,7 +128,7 @@ public class Utilisateur {
 		this.credit = credit;
 	}
 	
-	public byte isAdministrateur() {
+	public byte getAdministrateur() {
 		return administrateur;
 	}
 	

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<link rel="stylesheet" href="css/style.css" />
         <meta charset="utf-8" />
         <title>Connexion</title>
     </head>
@@ -29,7 +30,7 @@
         </form>
         
         <c:if test="${ error }">
-        <p>
+        <p class="incorrect">
         	Pseudo ou mot de passe incorrect.
         </p>
         </c:if>

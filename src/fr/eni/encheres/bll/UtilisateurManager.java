@@ -40,4 +40,14 @@ public class UtilisateurManager {
 		return user;
 	}
 	
+	public Utilisateur modifier(Utilisateur user) {
+
+        try {
+            user = this.utilisateurDAO.UpdateUtilisateur(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+	
 }

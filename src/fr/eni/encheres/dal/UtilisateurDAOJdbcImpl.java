@@ -11,6 +11,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 	private static final String SELECTUTILISATEURBYPSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
 	private static final String INSERTUTILISATEUR = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATEUTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE no_utilisateur = ?";
 	
 	@Override
 	public Utilisateur selectUtilisateurByPseudoAndPassword(Utilisateur user) throws SQLException {
@@ -41,7 +42,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 					pstmt.close();
 					rs.close();
 				}else {
-					System.out.println("MDP INCORECT");
+					System.out.println("MDP INCORRECT");
 				}	
 			}else {
 				System.out.println("aucun user a ce pseudo");
@@ -60,8 +61,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		//Utilisateur currentUtilisateur = new Utilisateur();
 		
 		if (!checkPseudoUtilisateurDispo(user)) {
-			System.out.println("il y a deja un utilisateur avec de pseudo");
-			String alreadyExist = "il y a deja un utilisateur avec de pseudo";
+			System.out.println("il y a deja un utilisateur avec ce pseudo");
+			String alreadyExist = "il y a deja un utilisateur avec ce pseudo";
 			user.setPseudo("");
 			user.setError(alreadyExist);
 		}else {
@@ -135,4 +136,38 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		return pseudoDispo;
 	}
 
-}
+	@Override
+	public Utilisateur UpdateUtilisateur (Utilisateur user) throws SQLException {
+		// TODO Auto-generated method stub
+				
+				try (Connection cnx = ConnectionProvider.getConnection()){
+					
+					PreparedStatement pstmt = cnx.prepareStatement(UPDATEUTILISATEUR);
+					
+					pstmt.setInt(10, user.getNoUtilisateur());
+					
+					
+					pstmt.setString(1, user.getPseudo());
+					pstmt.setString(2, user.getNom());
+					pstmt.setString(3, user.getPrenom());
+					pstmt.setString(4, user.getEmail());
+					pstmt.setInt(5, user.getTelephone());
+					pstmt.setString(6, user.getRue());
+					pstmt.setInt(7, user.getCodePostal());
+					pstmt.setString(8, user.getVille());
+					pstmt.setString(9, user.getMotDePasse());
+					
+					if (user.isValide()) {
+						pstmt.executeUpdate();
+						
+						pstmt.close();
+					}
+
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			
+		return user;
+		}
+	}

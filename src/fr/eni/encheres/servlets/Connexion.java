@@ -40,7 +40,7 @@ public class Connexion extends HttpServlet {
 		
 		System.out.println(currentUtilisateur.toString());
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		
 		/*
         request.setAttribute("pseudo", currentUtilisateur.getPseudo());

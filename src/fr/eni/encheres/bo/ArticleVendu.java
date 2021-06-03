@@ -10,13 +10,54 @@ public class ArticleVendu extends Categorie{
 	private Date dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
+	private int noUtilisateur;
+	private int noCategorie;
+	private String libelleCategorie;
+	private String pseudoVendeur;
 	private boolean etatVente; //article est il enchérissable ou non
+
+
+
+
+	/*
+	 * 
+	 * MODIF PAS SUR
+	 * 
+	 */
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+
+	public String getLibelleCategorie() {
+		return libelleCategorie;
+	}
+
+	public void setLibelleCategorie(String libelleCategorie) {
+		this.libelleCategorie = libelleCategorie;
+	}
+	/*
+	 * 
+	 * 
+	 */
+	
 	
 	
 	public ArticleVendu() {
 		
 	}
-	
+
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
 			Date dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente) {
 		super();
@@ -79,14 +120,22 @@ public class ArticleVendu extends Categorie{
 	public void setEtatVente(boolean etatVente) {
 		this.etatVente = etatVente;
 	}
+	
+	public String getPseudoVendeur() {
+		return pseudoVendeur;
+	}
+
+	public void setPseudoVendeur(String pseudoVendeur) {
+		this.pseudoVendeur = pseudoVendeur;
+	}
 
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + "]";
+				+ miseAPrix + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie="
+				+ noCategorie + ", libelleCategorie=" + libelleCategorie + ", pseudoVendeur=" + pseudoVendeur
+				+ ", etatVente=" + etatVente + "]";
 	}
-	
-	
 	
 }

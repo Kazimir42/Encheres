@@ -12,25 +12,35 @@ import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Utilisateur;
 
 /**
- * Servlet implementation class Inscription
+ * Servlet implementation class Modifier
  */
-@WebServlet("/inscription")
-public class Inscription extends HttpServlet {
+@WebServlet("/modifier")
+public class Modifier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Modifier() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		this.getServletContext().getRequestDispatcher("/WEB-INF/modifier.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utilisateur currentUtilisateur = new Utilisateur();
+		// TODO Auto-generated method stub
+Utilisateur currentUtilisateur = new Utilisateur();
+Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
 		
 		
 		String lePassword = "";
@@ -111,7 +121,9 @@ public class Inscription extends HttpServlet {
 			currentUtilisateur.setError("erreur, pas de ville entré");
 		}
 		
+		if(!lePseudo.equals(currentUtilisateur.getPseudo())) {
 		currentUtilisateur.setPseudo(lePseudo);
+		}
 		currentUtilisateur.setNom(leNom);
 		currentUtilisateur.setPrenom(lePrenom);
 		currentUtilisateur.setEmail(leEmail);
@@ -120,20 +132,25 @@ public class Inscription extends HttpServlet {
 		currentUtilisateur.setCodePostal(leCodePostal);
 		currentUtilisateur.setVille(laVille);
 		currentUtilisateur.setMotDePasse(lePassword);
+		currentUtilisateur.setCredit(sessionUtilisateur.getCredit());
+
+		currentUtilisateur.setNoUtilisateur(sessionUtilisateur.getNoUtilisateur());
 		
+
+					
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Utilisateur theUser = utilisateurManager.ajouter(currentUtilisateur);
+		Utilisateur theUser = utilisateurManager.modifier(currentUtilisateur);
 			
 		if (theUser.getError().isBlank()) {
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur", theUser);
 
-			response.sendRedirect("/Encheres/");
-				
+			response.sendRedirect("/Encheres/profil");
+			
 			System.out.println(theUser.toString());
 		}else {
 			request.setAttribute("error", theUser.getError());
-		    this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+		    this.getServletContext().getRequestDispatcher("/WEB-INF/modifier.jsp").forward(request, response);
 		}
 
 	}
