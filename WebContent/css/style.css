@@ -30,6 +30,9 @@ body{
 .incorrect {
     color : red;
 }
+.info {
+    color : blue;
+}	
 
 /*
 	PRODUIT IN INDEX
@@ -71,14 +74,13 @@ body{
   	}
 
 
-
 .product-text h2 {
   	margin: 0 38px 0 38px;
-  	padding-top: 52px;
+  	padding-top: 25px;
   	font-size: 34px;
   	color: #111;
+  	word-break: break-all;
 }
-
 
 .product-text h3 {
   	margin: 0 0 47px 38px;
@@ -142,4 +144,5 @@ span {
 .imgProduct{
 	width: auto;
 	height: 100%;
+	max-width: 362px;
 }

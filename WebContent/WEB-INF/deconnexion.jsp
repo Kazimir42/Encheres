@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/style.css" />
 <meta charset="UTF-8">
 <title>Deconnexion</title>
 </head>
 <body>
+
 	<%@ include file="menu.jsp" %>
 	
 	<h1>Vous etes déconnecté</h1>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DAOFactory;
 
@@ -20,8 +21,11 @@ public class ArticleManager {
 		
 		listArticle = this.articleDAO.selectAllArticle();
 		
-		
 		return listArticle;
+	}
+	
+	public void ajoutArticle(ArticleVendu theArticle, int noUtilisateur, Retrait currentRetrait) {
+		this.articleDAO.ajoutArticle(theArticle, noUtilisateur, currentRetrait);
 	}
 	
 }

@@ -16,8 +16,6 @@ public class Utilisateur {
 	
 	private String error = "";
 	
-	
-
 
 	public Utilisateur() {
 		

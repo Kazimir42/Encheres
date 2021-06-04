@@ -50,4 +50,14 @@ public class UtilisateurManager {
         return user;
     }
 	
+	public Utilisateur supprimer(Utilisateur user) {
+
+        try {
+            user = this.utilisateurDAO.DeleteUtilisateur(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+	
 }

@@ -51,7 +51,8 @@
         </c:if>
       </c:if>
 
-        <a href="/Encheres/modifier">Modifier les informations de mon profil</a>
+        <a href="/Encheres/modifier">Modifier les informations de mon profil</a><br />
+		<a href="/Encheres/supprimer">Supprimer mon compte</a>
 
 </body>
 </html>

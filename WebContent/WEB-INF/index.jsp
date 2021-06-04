@@ -50,20 +50,35 @@
 			<!--  UN PRODUIT -->
 			<div class="wrapper">
     			<div class="product-img">
-      				<img class="imgProduct" src="img/cat.jpg">
+    			<c:choose>
+    				<c:when test="${empty ArticleVendu.image}">
+        				<img class="imgProduct" src="img/default.jpg">
+    				</c:when>
+   					<c:otherwise>
+        				<img class="imgProduct" src="img/${ArticleVendu.image}">
+    				</c:otherwise>
+				</c:choose>
     			</div>
     			<div class="product-info">
       				<div class="product-text">
         				<h2>${ArticleVendu.nomArticle}</h2>
         				<h3>${ArticleVendu.libelleCategorie}</h3>
-        				<p><span class="littleBig">Prix :</span> ${ArticleVendu.prixVente} COINS</p>
+        				<c:choose>
+    						<c:when test="${ArticleVendu.prixVente > ArticleVendu.miseAPrix}">
+        						<p><span class="littleBig">Prix :</span> ${ArticleVendu.prixVente} COINS</p>
+    						</c:when>
+   							<c:otherwise>
+        						<p><span class="littleBig">Prix :</span> ${ArticleVendu.miseAPrix} COINS</p>
+    						</c:otherwise>
+						</c:choose>
+						
         				<p><span class="littleBig">Fin de l'enchère :</span> ${ArticleVendu.dateFinEncheres}</p>
         				<p><span class="littleBig">Vendeur :</span>${ArticleVendu.pseudoVendeur}</p>
       				</div>
       				
       				<c:if test="${utilisateur.noUtilisateur > 0 }">
       					<div class="product-price-btn">
-        					<button type="button">ENCHERIR</button>
+        					<a href="/Encheres/detail?noArticle=${ArticleVendu.noArticle}" ><button type="button">DETAIL</button></a>
       					</div>
       				</c:if>
       				

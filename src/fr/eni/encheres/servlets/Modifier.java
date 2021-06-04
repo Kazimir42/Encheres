@@ -39,8 +39,8 @@ public class Modifier extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-Utilisateur currentUtilisateur = new Utilisateur();
-Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
+		Utilisateur currentUtilisateur = new Utilisateur();
+		Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
 		
 		
 		String lePassword = "";

@@ -15,6 +15,9 @@ public class ArticleVendu extends Categorie{
 	private String libelleCategorie;
 	private String pseudoVendeur;
 	private boolean etatVente; //article est il enchérissable ou non
+	private String image;
+
+
 
 
 
@@ -128,6 +131,16 @@ public class ArticleVendu extends Categorie{
 	public void setPseudoVendeur(String pseudoVendeur) {
 		this.pseudoVendeur = pseudoVendeur;
 	}
+	
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 
 	@Override
 	public String toString() {

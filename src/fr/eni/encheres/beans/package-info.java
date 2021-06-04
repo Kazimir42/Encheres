@@ -1,1 +1,0 @@
-package fr.eni.encheres.beans;

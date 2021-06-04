@@ -13,7 +13,7 @@
    <c:when test="${ utilisateur.noUtilisateur > 0 }">
     <ul id="nav">
         <li><a href="/Encheres/">Encheres</a></li>
-        <li><a href="/Encheres/vente">Vendre un article</a></li>
+        <li><a href="/Encheres/nouvelle_vente">Vendre un article</a></li>
         <li><a href="/Encheres/profil">Mon profil</a></li>
         <li><a href="/Encheres/deconnexion">Deconnexion</a></li>
     </ul>
