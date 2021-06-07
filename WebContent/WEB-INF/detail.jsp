@@ -8,8 +8,9 @@
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
-
-	<div class="titre"><h1>Detail</h1></div>
+	<div class="container">
+		<div class="titre"><h1>Detail</h1></div>
+	</div>
 	
 </body>
 </html>

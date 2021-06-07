@@ -11,9 +11,9 @@
 <body>
 	<%@ include file="menu.jsp" %>
 
-	<div class="titre"><h1>Liste des enchères</h1></div>
 	
 	<div class="container">
+		<div class="titre"><h1>Liste des enchères</h1></div>
 	
 		<div class="filtre">
 			<div>
@@ -40,9 +40,7 @@
 		</div>
 	
 		<div class="articles">
-		
-		<!-- ${listProduit} -->
-		
+				
 
 		<c:forEach items="${listProduit}" var="ArticleVendu">
 
@@ -74,14 +72,13 @@
 						
         				<p><span class="littleBig">Fin de l'enchère :</span> ${ArticleVendu.dateFinEncheres}</p>
         				<p><span class="littleBig">Vendeur :</span>${ArticleVendu.pseudoVendeur}</p>
-      				</div>
       				
       				<c:if test="${utilisateur.noUtilisateur > 0 }">
       					<div class="product-price-btn">
         					<a href="/Encheres/detail?noArticle=${ArticleVendu.noArticle}" ><button type="button">DETAIL</button></a>
       					</div>
       				</c:if>
-      				
+      				</div>
     			</div>
   			</div>
 

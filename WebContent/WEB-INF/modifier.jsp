@@ -12,7 +12,9 @@
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
-	<h1>Modifier le profil</h1>
+	
+	<div class="container">
+		<h1 class="titre">Modifier mon profil</h1>
 	
 	<p class = "info">Les informations non modifiées resteront inchangées</p>
 
@@ -65,5 +67,6 @@
         <c:if test="${!empty error}">
 			<p class="incorrect">${error}</p>
         </c:if>
+    </div>
 </body>
 </html>

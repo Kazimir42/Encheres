@@ -9,7 +9,10 @@
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
-    <h1>Supprimer le compte ?</h1>
+	
+	<div class="container">
+		<h1 class="titre">Supprimer le compte</h1>
+		
     <p class="info">Attention, cette action est irréversible</p>
 
     <form method="post" action="/Encheres/supprimer">
@@ -19,6 +22,8 @@
     <form method="post" action="/Encheres/profil">
         <input type="submit" value="Annuler" />
     </form>
+    
+    </div>
 
 </body>
 </html>

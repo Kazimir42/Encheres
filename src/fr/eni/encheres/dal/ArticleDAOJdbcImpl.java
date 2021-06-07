@@ -96,11 +96,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			pstmt.close();
 			
 			
-
-			
-
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

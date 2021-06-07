@@ -32,7 +32,30 @@ body{
 }
 .info {
     color : blue;
-}	
+}
+.container{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	margin-top: 50px;
+}
+.box{
+	background-color: #222;
+}
+#nav{
+	padding-top: 9px;
+}
+#nav > li{
+	margin-left: 25px;
+	margin-right: 50px;
+}
+#nav a{
+    text-decoration: none;
+    color: white;
+}
+.logo a{
+	color: white;
+}
 
 /*
 	PRODUIT IN INDEX
@@ -40,7 +63,6 @@ body{
 .articles{
 	display: flex;
 	justify-content: center;
-	width: 80%;
     flex-wrap: wrap;
     margin-left: auto;
     margin-right: auto;
@@ -73,17 +95,19 @@ body{
   	width: 100%;
   	}
 
+.product-text{
+	margin: 0 0px 0 12%;
+}
 
 .product-text h2 {
-  	margin: 0 38px 0 38px;
   	padding-top: 25px;
   	font-size: 34px;
   	color: #111;
   	word-break: break-all;
+  	padding-bottom: 50px;
 }
 
 .product-text h3 {
-  	margin: 0 0 47px 38px;
   	font-size: 13px;
   	font-weight: 400;
   	text-transform: uppercase;
@@ -92,7 +116,6 @@ body{
 }
 
 .product-text p {
-  margin: 0 0 0 38px;
   color: #555;
   line-height: 1.7em;
   font-size: 15px;
@@ -102,16 +125,14 @@ body{
 
 .product-price-btn {
   height: 103px;
-  width: 327px;
+  width: 100%;
   margin-top: 17px;
   position: relative;
 }
 
 .product-price-btn{
   display: inline-block;
-  position: absolute;
   height: 50px;
-  margin: 0 0 0 38px;
   font-size: 28px;
   font-weight: lighter;
   color: #474747;

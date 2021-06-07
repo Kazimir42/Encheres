@@ -12,7 +12,9 @@
 </head>
 <body>
     <%@ include file="menu.jsp" %>
-    <h1>Informations du profil</h1>
+    
+    <div class="container">
+		<h1 class="titre">Informations du profil</h1>
 
     <c:if test="${utilisateur.noUtilisateur > 0}">
         <p>
@@ -53,6 +55,8 @@
 
         <a href="/Encheres/modifier">Modifier les informations de mon profil</a><br />
 		<a href="/Encheres/supprimer">Supprimer mon compte</a>
+		
+	</div>
 
 </body>
 </html>

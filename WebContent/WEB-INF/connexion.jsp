@@ -9,7 +9,11 @@
         <title>Connexion</title>
     </head>
     <body>
-		<%@ include file="menu.jsp" %>
+    	<%@ include file="menu.jsp" %>
+    	
+    	<div class="container">
+		<h1 class="titre">Se connecter</h1>
+		
         <c:if test="${ !empty pseudo }"><p><c:out value="Bonjour, vous vous appelez ${ pseudo }" /></p></c:if>
         
         <form method="post" action="/Encheres/connexion">
@@ -36,5 +40,7 @@
         </c:if>
         
         <a href="/Encheres/inscription">S'inscrire</a>
+        
+        </div>
     </body>
  </html>

@@ -11,7 +11,9 @@
 
 	<%@ include file="menu.jsp" %>
 	
-	<h1>Vous etes déconnecté</h1>
+	<div class="container">
+		<h1 class="titre">Déconnection</h1>
+	</div>
 
 </body>
 </html>

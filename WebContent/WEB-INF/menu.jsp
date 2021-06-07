@@ -5,9 +5,9 @@
 <link rel="stylesheet" href="css/navigation.css" />
 
 <div class="box">
-<div>
-<a href="/Encheres/"><p style='font-size: 30px;'>ENI - Enchères<p></a>
-</div>
+	<div class="logo">
+		<a href="/Encheres/" style="font-size: 30px; text-decoration: none">ENI - Enchères</a>
+	</div>
 <div>
 <c:choose>
    <c:when test="${ utilisateur.noUtilisateur > 0 }">
@@ -17,9 +17,11 @@
         <li><a href="/Encheres/profil">Mon profil</a></li>
         <li><a href="/Encheres/deconnexion">Deconnexion</a></li>
     </ul>
-         </c:when>
+    </c:when>
     <c:otherwise>
-          <li><a href="/Encheres/connexion">S'inscrire, se connecter </a></li>
+     <ul id="nav">
+          <li><a href="/Encheres/connexion" style="">S'inscrire, se connecter </a></li>
+     </ul>
     </c:otherwise>
 </c:choose>
 </div>

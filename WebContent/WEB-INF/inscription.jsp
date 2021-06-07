@@ -12,48 +12,50 @@
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
-	<h1>S'inscrire</h1>
+	
+	<div class="container">
+	<h1 class="titre">S'inscrire</h1>
 
      <form method="post" action="/Encheres/inscription">
         <p>
             <label for="pseudo">Pseudo : </label>
-            <input type="text" name="pseudo" id="pseudo" />
+            <input type="text" required="required" name="pseudo" id="pseudo" />
         </p>
          <p>
             <label for="nom">Nom : </label>
-            <input type="text" name="nom" id="nom" />
+            <input type="text" required="required" name="nom" id="nom" />
         </p>
          <p>
             <label for="prenom">Prénom : </label>
-            <input type="text" name="prenom" id="prenom" />
+            <input type="text" required="required" name="prenom" id="prenom" />
         </p>
          <p>
             <label for="email">Email : </label>
-            <input type="text" name="email" id="email" />
+            <input type="text" required="required" name="email" id="email" />
         </p>
          <p>
             <label for="telephone">Téléphone : </label>
-            <input type="number" name="telephone" id="telephone" />
+            <input type="number" required="required" name="telephone" id="telephone" />
         </p>
          <p>
             <label for="rue">Rue : </label>
-            <input type="text" name="rue" id="rue" />
+            <input type="text" required="required" name="rue" id="rue" />
         </p>
          <p>
             <label for="codePostal">Code postal : </label>
-            <input type="number" name="codePostal" id="codePostal" />
+            <input type="number" required="required" name="codePostal" id="codePostal" />
         </p>
          <p>
             <label for="ville">Ville : </label>
-            <input type="text" name="ville" id="ville" />
+            <input type="text" required="required" name="ville" id="ville" />
         </p>
         <p>
             <label for="mdp">Mot de passe : </label>
-            <input type="password" name="mdp" id="mdp" />
+            <input type="password" required="required" name="mdp" id="mdp" />
         </p>
         <p>
             <label for="confirmation">Confirmation : </label>
-            <input type="password" name="confirmation" id="confirmation" />
+            <input type="password" required="required" name="confirmation" id="confirmation" />
         </p>
 
             <input type="submit" />
@@ -65,5 +67,6 @@
         <c:if test="${!empty error}">
 			<p class="incorrect">${error}</p>
         </c:if>
+    </div>
 </body>
 </html>

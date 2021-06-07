@@ -8,7 +8,6 @@ import java.io.IOException;
 
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -108,15 +107,18 @@ public class NouvelleVente extends HttpServlet {
 				
         // On vérifie qu'on a bien reçu un fichier
         String nomFichier = getNomFichier(part);
-                
+        //String nomFichierExtension = "";
+        
+        System.out.println(nomFichier);
+        
         if (nomFichier.isBlank()) {
         	nomFichier = null;
 		}else {
-	        String extension = nomFichier.substring(nomFichier.lastIndexOf(".") + 1);
+	        //String extension = nomFichier.substring(nomFichier.lastIndexOf(".") + 1);
 
-	        nomFichier = UUID.randomUUID().toString();
+	        //nomFichier = UUID.randomUUID().toString();
 	        
-	        nomFichier = nomFichier + "." + extension;
+	        //nomFichierExtension = nomFichier + "." + extension;
 
 	        // Si on a bien un fichier
 	        if (nomFichier != null && !nomFichier.isEmpty()) {
