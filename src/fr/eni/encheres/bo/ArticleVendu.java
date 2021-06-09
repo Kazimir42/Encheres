@@ -1,13 +1,13 @@
 package fr.eni.encheres.bo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ArticleVendu extends Categorie{
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private Date dateDebutEncheres;
-	private Date dateFinEncheres;
+	private Timestamp dateDebutEncheres;
+	private Timestamp dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
 	private int noUtilisateur;
@@ -16,7 +16,8 @@ public class ArticleVendu extends Categorie{
 	private String pseudoVendeur;
 	private boolean etatVente; //article est il enchérissable ou non
 	private String image;
-
+	private int noUtilisateurEncherisseur;
+	private String pseudoUtilisateurEncherisseur;
 
 
 
@@ -50,19 +51,39 @@ public class ArticleVendu extends Categorie{
 	public void setLibelleCategorie(String libelleCategorie) {
 		this.libelleCategorie = libelleCategorie;
 	}
+	
+	
+	
+	public int getNoUtilisateurEncherisseur() {
+		return noUtilisateurEncherisseur;
+	}
+
+	public void setNoUtilisateurEncherisseur(int noUtilisateurEncherisseur) {
+		this.noUtilisateurEncherisseur = noUtilisateurEncherisseur;
+	}
+
+	public String getPseudoUtilisateurEncherisseur() {
+		return pseudoUtilisateurEncherisseur;
+	}
+
+	public void setPseudoUtilisateurEncherisseur(String pseudoUtilisateurEncherisseur) {
+		this.pseudoUtilisateurEncherisseur = pseudoUtilisateurEncherisseur;
+	}
+
+	
 	/*
 	 * 
 	 * 
 	 */
 	
 	
-	
+
 	public ArticleVendu() {
 		
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente) {
+	public ArticleVendu(int noArticle, String nomArticle, String description, Timestamp dateDebutEncheres,
+			Timestamp dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -93,16 +114,16 @@ public class ArticleVendu extends Categorie{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getDateDebutEncheres() {
+	public Timestamp getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
-	public void setDateDebutEncheres(Date dateDebutEncheres) {
+	public void setDateDebutEncheres(Timestamp dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
-	public Date getDateFinEncheres() {
+	public Timestamp getDateFinEncheres() {
 		return dateFinEncheres;
 	}
-	public void setDateFinEncheres(Date dateFinEncheres) {
+	public void setDateFinEncheres(Timestamp dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 	public int getMiseAPrix() {

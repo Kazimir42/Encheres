@@ -60,4 +60,31 @@ public class UtilisateurManager {
         return user;
     }
 	
+	public Utilisateur retrouver(String pseudo, String question1, String question2) {
+        
+        Utilisateur currentUtilisateur = new Utilisateur();
+        currentUtilisateur.setPseudo(pseudo);
+        currentUtilisateur.setQuestion1(question1);
+        currentUtilisateur.setQuestion2(question2);
+    
+        try {
+            
+            currentUtilisateur = this.utilisateurDAO.selectUtilisateurRetrouver(currentUtilisateur);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return currentUtilisateur;
+    }
+	
+	public void updateCredit(int noUtilisateur ,int credit) {
+		this.utilisateurDAO.updateCredit(noUtilisateur, credit);
+	}
+	
+	public int recupererCreditByNo(int noUtilisateur){
+		int credit = this.utilisateurDAO.selectCreditUtilisateur(noUtilisateur);
+		
+		return credit;
+	}
+	
+	
 }

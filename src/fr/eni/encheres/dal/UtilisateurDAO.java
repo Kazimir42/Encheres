@@ -16,4 +16,10 @@ public interface UtilisateurDAO {
 	
 	public Utilisateur DeleteUtilisateur(Utilisateur user) throws SQLException;
 
+	public Utilisateur selectUtilisateurRetrouver(Utilisateur user) throws SQLException;
+	
+	public void updateCredit(int noUtilisateur, int credit);
+	
+	public int selectCreditUtilisateur(int noUtilisateur);
+
 }

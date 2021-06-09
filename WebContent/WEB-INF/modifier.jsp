@@ -59,6 +59,14 @@
             <label for="confirmation">Confirmation : </label>
             <input type="password" name="confirmation" id="confirmation" value="${utilisateur.motDePasse}" />
         </p>
+        <p>
+            <label for="question1">Quel est votre animal préféré ?</label>
+            <input type="text" name="question1" id="question1" value="${utilisateur.question1}" />
+        </p>
+        <p>
+            <label for="question2">Quel était le prénom de votre premier amour ?</label>
+            <input type="text" name="question2" id="question2" value="${utilisateur.question2}" />
+        </p>
         
         <input type="submit" />
         

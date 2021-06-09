@@ -17,24 +17,54 @@
 	
 		<div class="filtre">
 			<div>
-				<label for="categorie">Catégorie : </label>
-			</div>
-			<div class="categorie">
-				<select name="categorie" id="categorie">
-    				<option selected value="toutes">Toutes</option>
-   			    	<option value="ameublement">Ameublement</option>
-    				<option value="informatique">Informatique</option>
-   			    	<option value="vetements">Vêtements</option>
-    				<option value="sport">Sport et loisirs</option>
-				</select>
-			</div>
-			<div>
 				<form>
-  					<div>
-   						<input type="search" id="recherche" name="recherche"
-    						 placeholder="Le nom de l'article contient" size=21>
-    					<button>Rechercher</button>
-  					</div>
+				
+				<p>Filtres : </p>
+				   	
+				   	<input type="search" id="recherche" name="recherche" placeholder="Le nom de l'article contient" size=21>
+				
+					<br />
+				
+					<label for="categorie">Catégorie : </label>
+					<select name="categorie" id="categorie">
+    					<option selected value="toutes">Toutes</option>
+   			    		<option value="ameublement">Ameublement</option>
+    					<option value="informatique">Informatique</option>
+   			    		<option value="vetements">Vêtements</option>
+    					<option value="sport">Sport et loisirs</option>
+					</select>
+					
+					<br />
+					
+    				
+    				<input type="radio" name="typeTo" id="achat"><label for="achat">Achats : </label>
+    				
+    				<input type="checkbox" id="enchereOuverte" name="enchereOuverte">
+  					<label for="enchereOuverte">Encheres ouvertes</label>
+  					
+    				<input type="checkbox" id="enchereEnCours" name="enchereEnCours">
+  					<label for="enchereEnCours">Mes dernieres encheres en cours</label>
+  					
+  					<input type="checkbox" id="enchereRemporte" name="enchereRemporte">
+  					<label for="enchereRemporte">Mes enchères remportés</label>
+    				
+    				<br />
+    				
+    				
+    				<input type="radio" name="typeTo" id="vente"><label for="vente">Mes ventes</label>
+    				
+    				<input type="checkbox" id="venteEnCours" name="venteEnCours">
+  					<label for="venteEnCours">Mes ventes en cours</label>
+  					
+    				<input type="checkbox" id="venteNonDebute" name="venteNonDebute">
+  					<label for="venteNonDebute">Mes ventes non débutées</label>
+  					
+  					<input type="checkbox" id="venteTermine" name="venteTermine">
+  					<label for="venteTermine">Mes ventes terminées</label>
+    				
+    				<br />
+    				
+    				<input type="submit"  value="Rechercher">
 				</form>
 			</div>
 		</div>

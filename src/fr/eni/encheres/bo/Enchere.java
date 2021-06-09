@@ -1,11 +1,11 @@
 package fr.eni.encheres.bo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Enchere {	//MOUAI
 	private int noUtilisateur;
 	private int noArticle;
-	private Date dateEnchere;
+	private Timestamp dateEnchere;
 	private int montantEnchere;
 	
 	
@@ -14,7 +14,7 @@ public class Enchere {	//MOUAI
 	}
 	
 
-	public Enchere(int noUtilisateur, int noArticle, Date dateEnchere, int montantEnchere) {
+	public Enchere(int noUtilisateur, int noArticle, Timestamp dateEnchere, int montantEnchere) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.noArticle = noArticle;
@@ -40,10 +40,10 @@ public class Enchere {	//MOUAI
 		this.noArticle = noArticle;
 	}
 
-	public Date getDateEnchere() {
+	public Timestamp getDateEnchere() {
 		return dateEnchere;
 	}
-	public void setDateEnchere(Date dateEnchere) {
+	public void setDateEnchere(Timestamp dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 	public int getMontantEnchere() {
@@ -52,10 +52,15 @@ public class Enchere {	//MOUAI
 	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + "]";
+		return "Enchere [noUtilisateur=" + noUtilisateur + ", noArticle=" + noArticle + ", dateEnchere=" + dateEnchere
+				+ ", montantEnchere=" + montantEnchere + "]";
 	}
+
+	
 	
 	
 	

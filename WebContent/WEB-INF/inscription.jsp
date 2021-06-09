@@ -57,6 +57,15 @@
             <label for="confirmation">Confirmation : </label>
             <input type="password" required="required" name="confirmation" id="confirmation" />
         </p>
+        <p>
+            <label for="question1">Quel est votre animal préféré ?</label>
+            <input type="text" required="required" name="question1" id="question1" />
+        </p>
+        
+        <p>
+            <label for="question2">Quel était le prénom de votre premier amour ?</label>
+            <input type="text" required="required" name="question2" id="question2" />
+        </p>
 
             <input type="submit" />
             <input type="checkbox" name="souvenir" id="souvenir" checked>

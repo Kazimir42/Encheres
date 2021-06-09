@@ -52,6 +52,8 @@ public class Modifier extends HttpServlet {
 		String leEmail = "";
 		String laRue = "";
 		String laVille = "";
+		String laQuestion1 ="";
+		String laQuestion2 ="";
 		
 		
 		int leTel = 0;
@@ -121,6 +123,20 @@ public class Modifier extends HttpServlet {
 			currentUtilisateur.setError("erreur, pas de ville entré");
 		}
 		
+		//CHECK QUESTION1 REMPLI
+		if (!request.getParameter("question1").isBlank()) {
+			laQuestion1 = request.getParameter("question1");
+		}else {
+			currentUtilisateur.setError("erreur, pas de réponse à la première question de sécurité entrée");
+		}
+				
+		//CHECK QUESTION2 REMPLI
+		if (!request.getParameter("question2").isBlank()) {
+			laQuestion2 = request.getParameter("question2");
+		}else {
+			currentUtilisateur.setError("erreur, pas de réponse à la deuxième question de sécurité entrée");
+		}
+		
 		if(!lePseudo.equals(currentUtilisateur.getPseudo())) {
 		currentUtilisateur.setPseudo(lePseudo);
 		}
@@ -133,6 +149,8 @@ public class Modifier extends HttpServlet {
 		currentUtilisateur.setVille(laVille);
 		currentUtilisateur.setMotDePasse(lePassword);
 		currentUtilisateur.setCredit(sessionUtilisateur.getCredit());
+		currentUtilisateur.setQuestion1(laQuestion1);
+		currentUtilisateur.setQuestion2(laQuestion2);
 
 		currentUtilisateur.setNoUtilisateur(sessionUtilisateur.getNoUtilisateur());
 		

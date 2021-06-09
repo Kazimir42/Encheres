@@ -46,11 +46,11 @@
         </p>
          <p>
             <label for="dateDebutArticle">Début de l'enchère :</label>
-            <input type="date" required="required" name="dateDebutArticle" id="dateDebutArticle" />
+            <input type="datetime-local" required="required" name="dateDebutArticle" id="dateDebutArticle" />
         </p>
          <p>
             <label for="dateFinArticle">Fin de l'enchère : </label>
-            <input type="date" required="required" name="dateFinArticle" id="dateFinArticle" />
+            <input type="datetime-local" required="required" name="dateFinArticle" id="dateFinArticle" />
         </p>
         
         <br />

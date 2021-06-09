@@ -6,8 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import java.sql.Date;
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -52,13 +51,15 @@ public class NouvelleVente extends HttpServlet {
 		Retrait currentRetrait = new Retrait();
 		Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
 		String theError = "";
+		String defaultTimesStamp = "2000-01-10 00:00:00";
+		
 		
 		String nomArticle = "";
 		String descArticle = "";
 		int catNoArticle = 0;
 		int prixArticle = 0;
-		Date dateDebutArticle = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-		Date dateFinArticle = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		Timestamp dateDebutArticle = Timestamp.valueOf(defaultTimesStamp);
+		Timestamp dateFinArticle =  Timestamp.valueOf(defaultTimesStamp);
 		String rueRetrait = "";
 		int codePostalRetrait = 0;
 		String villeRetrait = "";
@@ -143,14 +144,28 @@ public class NouvelleVente extends HttpServlet {
 		
 		//CHECK DATE DEBUT
 		if (!request.getParameter("dateDebutArticle").isBlank()) {
-			dateDebutArticle = Date.valueOf(request.getParameter("dateDebutArticle"));
+			
+			String theDateHoure = request.getParameter("dateDebutArticle");
+						
+			String dateTime = theDateHoure.replace("T"," ");
+			dateTime = dateTime + ":00";
+			
+			dateDebutArticle = Timestamp.valueOf(dateTime);			
+			
 		}else {
 			theError = "Erreur, pas de date de debut";
 		}
 		
 		//CHECK DATE FIN
 		if (!request.getParameter("dateFinArticle").isBlank()) {
-			dateFinArticle = Date.valueOf(request.getParameter("dateFinArticle"));
+			
+			String theDateHoure = request.getParameter("dateFinArticle");
+			
+			String dateTime = theDateHoure.replace("T"," ");
+			dateTime = dateTime + ":00";
+			
+			dateFinArticle = Timestamp.valueOf(dateTime);	
+			
 		}else {
 			theError = "Erreur, pas de date de fin";
 		}
@@ -187,7 +202,7 @@ public class NouvelleVente extends HttpServlet {
 			currentArticle.setMiseAPrix(prixArticle);
 			currentArticle.setDateDebutEncheres(dateDebutArticle);
 			currentArticle.setDateFinEncheres(dateFinArticle);
-			
+		
 			currentRetrait.setRue(rueRetrait);
 			currentRetrait.setCodePostal(codePostalRetrait);
 			currentRetrait.setVille(villeRetrait);

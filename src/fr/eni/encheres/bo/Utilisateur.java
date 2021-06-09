@@ -15,14 +15,18 @@ public class Utilisateur {
 	private byte administrateur;
 	
 	private String error = "";
+	private String question1 = "";
+	private String question2= "";
 	
+	
+
 
 	public Utilisateur() {
 		
 	}
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
-			String rue, int codePostal, String ville, String motDePasse, int credit, byte administrateur) {
+			String rue, int codePostal, String ville, String motDePasse, int credit, byte administrateur, String question1, String question2) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -36,6 +40,8 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
+		this.question1 = question1;
+		this.question2 = question2;
 	}
 	
 	public int getNoUtilisateur() {
@@ -142,6 +148,22 @@ public class Utilisateur {
 		this.error = error;
 	}
 	
+	public String getQuestion1() {
+		return question1;
+	}
+	
+	public void setQuestion1(String question1) {
+		this.question1 = question1;
+	}
+	
+	public String getQuestion2() {
+		return question2;
+	}
+	
+	public void setQuestion2(String question2) {
+		this.question2 = question2;
+	}
+	
 	public boolean isValide() {
 		boolean validite;
 		
@@ -162,7 +184,7 @@ public class Utilisateur {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + ", error=" + error + "]";
+				+ ", administrateur=" + administrateur + ", error=" + error + ", question1 =" + ",question2 =" + "]";
 	}
 	
 	

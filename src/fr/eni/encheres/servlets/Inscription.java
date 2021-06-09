@@ -42,6 +42,8 @@ public class Inscription extends HttpServlet {
 		String leEmail = "";
 		String laRue = "";
 		String laVille = "";
+		String laQuestion1 ="";
+		String laQuestion2 ="";
 		
 		
 		int leTel = 0;
@@ -111,6 +113,20 @@ public class Inscription extends HttpServlet {
 			currentUtilisateur.setError("erreur, pas de ville entré");
 		}
 		
+		//CHECK QUESTION1 REMPLI
+		if (!request.getParameter("question1").isBlank()) {
+			laQuestion1 = request.getParameter("question1");
+		}else {
+			currentUtilisateur.setError("erreur, pas de réponse à la première question de sécurité entrée");
+		}
+					
+		//CHECK QUESTION2 REMPLI
+		if (!request.getParameter("question2").isBlank()) {
+			laQuestion2 = request.getParameter("question2");
+		}else {
+			currentUtilisateur.setError("erreur, pas de réponse à la deuxième question de sécurité entrée");
+		}
+		
 		currentUtilisateur.setPseudo(lePseudo);
 		currentUtilisateur.setNom(leNom);
 		currentUtilisateur.setPrenom(lePrenom);
@@ -120,6 +136,8 @@ public class Inscription extends HttpServlet {
 		currentUtilisateur.setCodePostal(leCodePostal);
 		currentUtilisateur.setVille(laVille);
 		currentUtilisateur.setMotDePasse(lePassword);
+		currentUtilisateur.setQuestion1(laQuestion1);
+		currentUtilisateur.setQuestion2(laQuestion2);
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur theUser = utilisateurManager.ajouter(currentUtilisateur);
