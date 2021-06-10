@@ -22,8 +22,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	
 	private static final String UPDATETOZEROMONTANT = "UPDATE ENCHERES SET montant_enchere = ? WHERE no_utilisateur = ? AND no_article = ?";
 	
-	private static final String SELECTENCHERRISEURPARNUMEROARTICLEORDERBY = "SELECT no_utilisateur, montant_enchere FROM ENCHERES WHERE no_article = ? ORDER BY montant_enchere ";
-
+	private static final String SELECTENCHERRISEURPARNUMEROARTICLEORDERBY = "SELECT no_utilisateur, montant_enchere FROM ENCHERES WHERE no_article = ? ORDER BY date_enchere ";
+	
 	public void InsertEnchere(Enchere currentEnchere) {
 		
 		try (Connection cnx = ConnectionProvider.getConnection()){
@@ -83,7 +83,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			if (rs.next()) {
 				creditEncherie = rs.getInt("montant_enchere");
 				
-				System.out.println("L'user avait déja enchérie : " + creditEncherie + " coins sur cette article"); 	
+				System.out.println("L'user  avait déja enchérie : " + creditEncherie + " coins sur cette article"); 	
 
 			}
 			pstmt.close();

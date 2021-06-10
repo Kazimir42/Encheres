@@ -8,7 +8,8 @@ import fr.eni.encheres.bo.Retrait;
 
 public interface ArticleDAO {
 	
-	public List<ArticleVendu> selectAllArticle();
+	public List<ArticleVendu> selectAllArticle(boolean [] filtreArticles, int numUtilisateur);
+
 	
 	public void ajoutArticle(ArticleVendu theArticle, int noUtilisateur, Retrait currentRetrait);
 
@@ -18,10 +19,16 @@ public interface ArticleDAO {
 	
     public void updatePrixVente(int noUtilisateur, int prixVente) throws SQLException;
     
-    public List<ArticleVendu> selectCategorie(String libelle);
-    
-    public List<ArticleVendu> selectRecherche(String recherche);
+    public List<ArticleVendu> selectCategorie(String libelle, boolean [] filtreArticles, int numUtilisateur);
 
-    public List<ArticleVendu> selectRechercheEtCategorie(String recherche, String categorie);
+    public List<ArticleVendu> selectRecherche(String recherche, boolean [] filtreArticles, int numUtilisateur);
+
+    public List<ArticleVendu> selectRechercheEtCategorie(String recherche, String categorie, boolean [] filtreArticles, int numUtilisateur);
+
+    public void deleteArticle(int noArticle);
+    
+	public void modifierArticle(ArticleVendu theArticle, Retrait currentRetrait);
+	
+	
 
 }

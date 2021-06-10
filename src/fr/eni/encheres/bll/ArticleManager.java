@@ -17,11 +17,11 @@ public class ArticleManager {
         this.articleDAO = DAOFactory.getArticleDAO();
     }
     
-    public List<ArticleVendu> afficherTous() {
+    public List<ArticleVendu> afficherTous(boolean [] filtreArticles, int numUtilisateur) {
         List<ArticleVendu> listArticle = new ArrayList<ArticleVendu>();
-        
-        listArticle = this.articleDAO.selectAllArticle();
-        
+
+        listArticle = this.articleDAO.selectAllArticle(filtreArticles, numUtilisateur);
+
         return listArticle;
     }
     
@@ -59,29 +59,36 @@ public class ArticleManager {
     	this.articleDAO.updatePrixVente(leNoArticle, lePrix);
     }
     
-    public List<ArticleVendu> afficherParCategorie(String libelle) {
+    public List<ArticleVendu> afficherParCategorie(String libelle, boolean [] filtreArticles, int numUtilisateur) {
         List<ArticleVendu> listArticle = new ArrayList<ArticleVendu>();
 
-        listArticle = this.articleDAO.selectCategorie(libelle);
+        listArticle = this.articleDAO.selectCategorie(libelle, filtreArticles, numUtilisateur);
 
         return listArticle;
     }
     
-    public List<ArticleVendu> afficherParRecherche(String recherche) {
+    public List<ArticleVendu> afficherParRecherche(String recherche, boolean [] filtreArticles, int numUtilisateur) {
         List<ArticleVendu> listArticle = new ArrayList<ArticleVendu>();
         
-        listArticle = this.articleDAO.selectRecherche(recherche);
+        listArticle = this.articleDAO.selectRecherche(recherche, filtreArticles, numUtilisateur);
         
         return listArticle;
     }
     
-    public List<ArticleVendu> afficherParRechercheEtCategorie(String recherche, String categorie) {
-    	List<ArticleVendu> listArticle = new ArrayList<ArticleVendu>();
+    public List<ArticleVendu> afficherParRechercheEtCategorie(String recherche, String categorie, boolean [] filtreArticles, int numUtilisateur) {
+        List<ArticleVendu> listArticle = new ArrayList<ArticleVendu>();
         
-        listArticle = this.articleDAO.selectRechercheEtCategorie(recherche, categorie);
+        listArticle = this.articleDAO.selectRechercheEtCategorie(recherche, categorie, filtreArticles, numUtilisateur);
         
         return listArticle;
     }
     
+    public void supprimer(int noArticle) {
+    	this.articleDAO.deleteArticle(noArticle);
+    }
+    
+    public void modifierArticle(ArticleVendu theArticle, Retrait currentRetrait) {
+        this.articleDAO.modifierArticle(theArticle, currentRetrait);
+    }
     
 }

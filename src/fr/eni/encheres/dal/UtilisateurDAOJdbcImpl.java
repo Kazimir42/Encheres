@@ -274,7 +274,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			System.out.println("Credit de l'utilisateur modifié");
 			
 			
 		} catch (SQLException e) {

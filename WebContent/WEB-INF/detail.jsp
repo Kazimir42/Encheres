@@ -59,7 +59,11 @@
       				  	<c:choose>
     						
     						<c:when test="${utilisateur.pseudo eq ArticleVendu.pseudoVendeur}">
-
+								<c:if test="${enCours == 1}">
+									<br />
+									<a href="/Encheres/modifier_vente?noArticle=${ArticleVendu.noArticle}" >modifier</a><br />
+									<a href="/Encheres/supprimer_vente?noArticle=${ArticleVendu.noArticle}" >supprimer</a>
+      							</c:if>
     						</c:when>
    							
    							<c:otherwise>

@@ -5,7 +5,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
@@ -23,19 +22,19 @@ import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 
 /**
- * Servlet implementation class NouvelleVente
+ * Servlet implementation class ModifierArticle
  */
-@WebServlet("/nouvelle_vente")
+@WebServlet("/modifier_vente")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 10MB
-        maxRequestSize = 1024 * 1024 * 50) // 50MB
-public class NouvelleVente extends HttpServlet {
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50) // 50MB
+
+public class ModifierArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
 	public static final int TAILLE_TAMPON = 10240;
     public static final String CHEMIN_FICHIERS = "/Java/workspace/Encheres/WebContent/img/";
-
-
+       
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -50,22 +49,46 @@ public class NouvelleVente extends HttpServlet {
             if (sessionUtilisateur == null) {
             	response.sendRedirect("/Encheres/");
             } else {
+            
+            
+            int paramNoArticle = Integer.parseInt(request.getParameter( "noArticle" ));
+            ArticleVendu detailArticle = new ArticleVendu();
+            Retrait detailRetrait = new Retrait();
+            ArticleManager articleManager = new ArticleManager();
+				
+		
+            detailArticle = articleManager.afficherDetail(paramNoArticle);
+            detailRetrait = articleManager.afficherRetrait(paramNoArticle);
+                
+            String debutEnchere = String.valueOf(detailArticle.getDateDebutEncheres());
+            debutEnchere = debutEnchere.replace(" ", "T");
 
+            String finEnchere = String.valueOf(detailArticle.getDateFinEncheres());
+        	finEnchere = finEnchere.replace(" ", "T");
+                
+        
+        	request.setAttribute("ArticleVendu", detailArticle);
+        	request.setAttribute("Retrait", detailRetrait);
+        	request.setAttribute("datedebut", debutEnchere);
+        	request.setAttribute("datefin", finEnchere);
+        
 
-            this.getServletContext().getRequestDispatcher("/WEB-INF/nouvelle_vente.jsp").forward(request, response);
-
+    
+        	this.getServletContext().getRequestDispatcher("/WEB-INF/modifier_vente.jsp").forward(request, response);	
             }
-        }
-	
+       }
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//ON DEVRAIT FAIRE UNE FONCTION COMME ON UTILISA LA MEME CHOSE DANS CREATION mais bon
+		
 		ArticleVendu currentArticle = new ArticleVendu();
 		Retrait currentRetrait = new Retrait();
-		Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
+		//Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
 		String theError = "";
 		String defaultTimesStamp = "2000-01-10 00:00:00";
 		
@@ -79,6 +102,7 @@ public class NouvelleVente extends HttpServlet {
 		String rueRetrait = "";
 		int codePostalRetrait = 0;
 		String villeRetrait = "";
+		int noArticle =  Integer.parseInt(request.getParameter("noArticle"));
 		
 		// CHECK NOM
 		if (!request.getParameter("nomArticle").isBlank()) {
@@ -164,9 +188,11 @@ public class NouvelleVente extends HttpServlet {
 			String theDateHoure = request.getParameter("dateDebutArticle");
 						
 			String dateTime = theDateHoure.replace("T"," ");
-			dateTime = dateTime + ":00";
+			//dateTime = dateTime + ":00";
 			
+
 			dateDebutArticle = Timestamp.valueOf(dateTime);			
+			
 			
 		}else {
 			theError = "Erreur, pas de date de debut";
@@ -178,7 +204,7 @@ public class NouvelleVente extends HttpServlet {
 			String theDateHoure = request.getParameter("dateFinArticle");
 			
 			String dateTime = theDateHoure.replace("T"," ");
-			dateTime = dateTime + ":00";
+			//dateTime = dateTime + ":00";
 			
 			dateFinArticle = Timestamp.valueOf(dateTime);	
 			
@@ -210,7 +236,8 @@ public class NouvelleVente extends HttpServlet {
 		
 		//SI Y A AUCUNE ERREUR
 		if (theError.isBlank()) {
-			
+
+			//currentArticle.setNoArticle(noArticle);
 			currentArticle.setNomArticle(nomArticle);
 			currentArticle.setDescription(descArticle);
 			currentArticle.setNoCategorie(catNoArticle);
@@ -219,13 +246,16 @@ public class NouvelleVente extends HttpServlet {
 			currentArticle.setDateDebutEncheres(dateDebutArticle);
 			currentArticle.setDateFinEncheres(dateFinArticle);
 		
+			currentArticle.setNoArticle(noArticle);
 			currentRetrait.setRue(rueRetrait);
 			currentRetrait.setCodePostal(codePostalRetrait);
 			currentRetrait.setVille(villeRetrait);
 			
+			System.out.println("article  modifier = " + currentArticle);
+			
 			ArticleManager articleManager = new ArticleManager();
 					
-			articleManager.ajoutArticle(currentArticle, sessionUtilisateur.getNoUtilisateur(), currentRetrait);
+			articleManager.modifierArticle(currentArticle, currentRetrait);
 			
 			response.sendRedirect("/Encheres/");
 			
@@ -234,10 +264,9 @@ public class NouvelleVente extends HttpServlet {
 			request.setAttribute("theError", theError);
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/nouvelle_vente.jsp").forward(request, response);
 		}
-				
-
 		
-		}
+	}
+	
 	
 	private void ecrireFichier( Part part, String nomFichier, String chemin ) throws IOException {
         BufferedInputStream entree = null;

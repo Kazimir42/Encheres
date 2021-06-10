@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Index</title>
 	<link rel="stylesheet" href="css/style.css" />
+	
+
 </head>
 <body>
 	<%@ include file="menu.jsp" %>
@@ -36,9 +38,10 @@
 					
 					<br />
 					
+    				<c:if test="${utilisateur.noUtilisateur > 0 }">
+    				<input type="radio" name="typeTo" id="achat" onclick="disableVente()"><label for="achat">Achats : </label>
     				
-    				<input type="radio" name="typeTo" id="achat"><label for="achat">Achats : </label>
-    				
+    				<span id="checkAchat">
     				<input type="checkbox" id="enchereOuverte" name="enchereOuverte">
   					<label for="enchereOuverte">Encheres ouvertes</label>
   					
@@ -47,12 +50,13 @@
   					
   					<input type="checkbox" id="enchereRemporte" name="enchereRemporte">
   					<label for="enchereRemporte">Mes enchères remportés</label>
-    				
+    				</span>
     				<br />
     				
     				
-    				<input type="radio" name="typeTo" id="vente"><label for="vente">Mes ventes</label>
+    				<input type="radio" name="typeTo" id="vente" onclick="disableAchat()"><label for="vente">Mes ventes</label>
     				
+    				<span id="checkVente">
     				<input type="checkbox" id="venteEnCours" name="venteEnCours">
   					<label for="venteEnCours">Mes ventes en cours</label>
   					
@@ -61,8 +65,9 @@
   					
   					<input type="checkbox" id="venteTermine" name="venteTermine">
   					<label for="venteTermine">Mes ventes terminées</label>
-    				
+    				</span>
     				<br />
+    				</c:if>
     				
     				<input type="submit"  value="Rechercher">
 				</form>
@@ -120,5 +125,62 @@
 		</div>
 	</div>
 	
+	
+	
+	
+	<script type="text/javascript">
+
+	document.getElementById("venteEnCours").disabled = true;
+	document.getElementById("venteNonDebute").disabled = true;
+	document.getElementById("venteTermine").disabled = true;	
+	document.getElementById("enchereOuverte").disabled = true;
+	document.getElementById("enchereEnCours").disabled = true;
+	document.getElementById("enchereRemporte").disabled = true;
+	document.getElementById("checkAchat").style.color = "grey";
+	document.getElementById("checkVente").style.color = "grey";
+	
+	function disableVente() {
+		console.log("on desac les ventes")
+		
+		document.getElementById("venteEnCours").disabled = true;
+		document.getElementById("venteNonDebute").disabled = true;
+		document.getElementById("venteTermine").disabled = true;	
+		
+		document.getElementById("enchereOuverte").disabled = false;
+		document.getElementById("enchereEnCours").disabled = false;
+		document.getElementById("enchereRemporte").disabled = false;
+
+		document.getElementById("checkAchat").style.color = "black";
+		document.getElementById("checkVente").style.color = "grey";
+	}
+	
+	function disableAchat() {
+		console.log("on desac les les achats")
+		
+		document.getElementById("checkAchat").style.color = "grey";
+		document.getElementById("checkVente").style.color = "black";
+		
+		document.getElementById("enchereOuverte").disabled = true;
+		document.getElementById("enchereEnCours").disabled = true;
+		document.getElementById("enchereRemporte").disabled = true;
+		
+		document.getElementById("venteEnCours").disabled = false;
+		document.getElementById("venteNonDebute").disabled = false;
+		document.getElementById("venteTermine").disabled = false;	
+		
+	}
+	/*if(achat.checked == true) {
+		
+		console.log("achat check");
+		  
+	}else if(vente.checked == true) {
+			
+		console.log("vente checke");
+		  
+	}else{
+		console.log("rien de check");
+	}*/
+
+	</script>
 </body>
 </html>

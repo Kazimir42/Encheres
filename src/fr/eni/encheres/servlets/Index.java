@@ -11,12 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class Index
@@ -30,39 +32,59 @@ public class Index extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //REMI
-    	Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-    	//
         
-    	
+    	Timestamp currentDate = new Timestamp(System.currentTimeMillis());
     	
         ArticleManager articleManager = new ArticleManager();
         
         List<ArticleVendu> listArticle = new ArrayList<>();
         String categorie = request.getParameter("categorie");
         String recherche = request.getParameter("recherche");
-
+        boolean enchereOuverte = request.getParameter("enchereOuverte") != null;
+        boolean enchereEnCours = request.getParameter("enchereEnCours") != null;
+        boolean enchereRemporte = request.getParameter("enchereRemporte") != null;
+        boolean venteEnCours = request.getParameter("venteEnCours") != null;
+        boolean venteNonDebute = request.getParameter("venteNonDebute") != null;
+        boolean venteTermine = request.getParameter("venteTermine") != null;
+        boolean[] filtreArticles = {venteEnCours, venteNonDebute, venteTermine, enchereOuverte, enchereEnCours, enchereRemporte};
         
+     
+        int numUtilisateur;
+        
+        HttpSession session = request.getSession(false);
+        
+        if (session == null) {
+        	numUtilisateur = 0;
+        } else {
+        
+        	Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
+        
+        	if (sessionUtilisateur == null) {
+        		numUtilisateur = 0;
+        	} else {
+        		numUtilisateur = sessionUtilisateur.getNoUtilisateur();
+        	}
+        }
+     
+    
         if(categorie == null || categorie.equals("toutes")) {
             if(recherche == null || recherche.isBlank()) {
-                listArticle = articleManager.afficherTous();
+                listArticle = articleManager.afficherTous(filtreArticles, numUtilisateur);
             }
             else {
-                listArticle = articleManager.afficherParRecherche(recherche);
+                listArticle = articleManager.afficherParRecherche(recherche, filtreArticles, numUtilisateur);
             }
         }
         else {
             if(recherche == null || recherche.isBlank()) {
-                listArticle = articleManager.afficherParCategorie(categorie);
+                listArticle = articleManager.afficherParCategorie(categorie, filtreArticles, numUtilisateur);
             }
             else {
-                listArticle = articleManager.afficherParRechercheEtCategorie(recherche, categorie);
+                listArticle = articleManager.afficherParRechercheEtCategorie(recherche, categorie, filtreArticles, numUtilisateur);
             }
         }
         Collections.reverse(listArticle);
         request.setAttribute("listProduit", listArticle);
-        
-
         
         //REMI
         EnchereManager enchereManager = new EnchereManager();
@@ -70,7 +92,6 @@ public class Index extends HttpServlet {
         for (ArticleVendu articleVendu : listArticle) {// on parcour les articles
         	
         	if (currentDate.after(articleVendu.getDateFinEncheres())) { // seuleemnt ceux dont les encheres sont terminé
-        		System.out.println("article ou l'enchere est termine : " + articleVendu.getNoArticle() + " = " + articleVendu.getNomArticle());
         		
         		//recup de tout les enchérisseurs pour le numéro d'article
         		List<Enchere> listEncherriseur = enchereManager.recupListEncherisseurCroissant(articleVendu.getNoArticle());
@@ -81,7 +102,6 @@ public class Index extends HttpServlet {
         			Enchere uneEnchere2 = listEncherriseur.get(i);
 
         			if(i == listEncherriseur.size() - 1) {
-        				System.out.println("on credite le vendeur");
                 		int creditVendeur = utilisateurManager.recupererCreditByNo(articleVendu.getNoUtilisateur());
         				utilisateurManager.updateCredit(articleVendu.getNoUtilisateur(), (creditVendeur + uneEnchere2.getMontantEnchere()));
         				
@@ -103,7 +123,6 @@ public class Index extends HttpServlet {
         		
 			}
 		}
-        
         
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }

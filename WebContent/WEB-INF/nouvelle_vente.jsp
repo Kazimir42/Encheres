@@ -59,15 +59,15 @@
         
          <p>
             <label for="rueRetrait">Rue : </label>
-            <input type="text" required="required" name="rueRetrait" id="rueRetrait" />
+            <input type="text" required="required" name="rueRetrait" id="rueRetrait" value="${utilisateur.rue}"/>
         </p>
         <p>
             <label for="codePostalRetrait">Code postal : </label>
-            <input type="number" required="required" name="codePostalRetrait" id="codePostalRetrait" />
+            <input type="number" required="required" name="codePostalRetrait" id="codePostalRetrait" value="${utilisateur.codePostal}"/>
         </p>
         <p>
             <label for="villeRetrait">Ville : </label>
-            <input type="text" required="required" name="villeRetrait" id="villeRetrait" />
+            <input type="text" required="required" name="villeRetrait" id="villeRetrait" value="${utilisateur.ville}"/>
         </p>
         
         <br /><br />

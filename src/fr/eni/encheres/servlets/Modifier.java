@@ -18,20 +18,29 @@ import fr.eni.encheres.bo.Utilisateur;
 public class Modifier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Modifier() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.getServletContext().getRequestDispatcher("/WEB-INF/modifier.jsp").forward(request, response);
+
+		
+    	HttpSession session = request.getSession(false);
+    	
+    	if (session == null) {
+    		response.sendRedirect("/Encheres/");
+        } else {
+            Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
+
+            if (sessionUtilisateur == null) {
+            	response.sendRedirect("/Encheres/");
+            } else {
+
+
+        		this.getServletContext().getRequestDispatcher("/WEB-INF/modifier.jsp").forward(request, response);
+
+            }
+        }	
 	}
 
 	/**

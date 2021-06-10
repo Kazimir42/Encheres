@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.EnchereManager;
@@ -25,55 +26,53 @@ import fr.eni.encheres.bo.Utilisateur;
 public class Detail extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Detail() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        ArticleVendu detailArticle = new ArticleVendu();
-        Retrait detailRetrait = new Retrait();
-        int paramNoArticle= Integer.parseInt(request.getParameter( "noArticle" ));
-        ArticleManager articleManager = new ArticleManager();
-    	Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-
-        
-        detailArticle = articleManager.afficherDetail(paramNoArticle);
-        detailRetrait = articleManager.afficherRetrait(paramNoArticle);
-        
-        
-                
-    	if (currentDate.before(detailArticle.getDateDebutEncheres())) {//SI ENCHERE PAS COMMENCE ALORS = 1
-			System.out.println("l'enchere na pas debute");
-			request.setAttribute("enCours", 1);
-			
-		}else if(currentDate.after(detailArticle.getDateFinEncheres())) { //SI ENCHERE TERMINE ALORS = 2
-			System.out.println("l'enchere est terminé");
-			request.setAttribute("enCours", 2);
-		}else {
-			System.out.println("l'enchere est en cours"); //SI ENCHERE EN COURS ALORS = 3
-			request.setAttribute("enCours", 3);
-		}
+    	HttpSession session = request.getSession(false);
     	
-        
-        
-        
-        
-        
-        
-        
-        request.setAttribute("ArticleVendu", detailArticle);
-        request.setAttribute("Retrait", detailRetrait);
-        
-        this.getServletContext().getRequestDispatcher("/WEB-INF/detail.jsp").forward(request, response);
-    
+    	if (session == null) {
+    		response.sendRedirect("/Encheres/");
+        } else {
+            Utilisateur sessionUtilisateur = (Utilisateur) request.getSession(false).getAttribute("utilisateur");
+
+            if (sessionUtilisateur == null) {
+            	response.sendRedirect("/Encheres/");
+            } else {
+
+                ArticleVendu detailArticle = new ArticleVendu();
+    	        Retrait detailRetrait = new Retrait();
+    	        int paramNoArticle= Integer.parseInt(request.getParameter( "noArticle" ));
+    	        ArticleManager articleManager = new ArticleManager();
+    	    	Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+
+    	        
+    	        detailArticle = articleManager.afficherDetail(paramNoArticle);
+    	        detailRetrait = articleManager.afficherRetrait(paramNoArticle);
+    	        
+    	        
+    	                
+    	    	if (currentDate.before(detailArticle.getDateDebutEncheres())) {//SI ENCHERE PAS COMMENCE ALORS = 1
+    				System.out.println("l'enchere na pas debute");
+    				request.setAttribute("enCours", 1);
+    			}else if(currentDate.after(detailArticle.getDateFinEncheres())) { //SI ENCHERE TERMINE ALORS = 2
+    				System.out.println("l'enchere est terminé");
+    				request.setAttribute("enCours", 2);
+    			}else {
+    				System.out.println("l'enchere est en cours"); //SI ENCHERE EN COURS ALORS = 3
+    				request.setAttribute("enCours", 3);
+    			}
+    	        
+    	        request.setAttribute("ArticleVendu", detailArticle);
+    	        request.setAttribute("Retrait", detailRetrait);
+    	        
+    	        this.getServletContext().getRequestDispatcher("/WEB-INF/detail.jsp").forward(request, response);
+            }
+        }
+
     }
 
     /**
