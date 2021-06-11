@@ -36,7 +36,14 @@
         						</span> Aucune
     						</c:when>
    							<c:otherwise>
-        						</span> ${ArticleVendu.prixVente} COINS <span class="littleBig">par</span> ${ArticleVendu.pseudoUtilisateurEncherisseur}</p>
+   								<c:choose>
+   									<c:when test="${utilisateur.pseudo eq ArticleVendu.pseudoUtilisateurEncherisseur}">
+        								</span> ${ArticleVendu.prixVente} COINS <span class="littleBig">par</span> ${ArticleVendu.pseudoUtilisateurEncherisseur}</p>
+        							</c:when>
+        							<c:otherwise>
+        								</span> ${ArticleVendu.prixVente} COINS <span class="littleBig">par</span> <a href="/Encheres/autre_profil?pseudo=${ArticleVendu.pseudoUtilisateurEncherisseur}">${ArticleVendu.pseudoUtilisateurEncherisseur}</a></p>
+        							</c:otherwise>
+        						</c:choose>
     						</c:otherwise>
 						</c:choose>
 						
@@ -51,8 +58,15 @@
         				
         				<p><span class="littleBig">Adresse de retrait :</span> ${Retrait.rue} ${Retrait.codePostal} ${Retrait.ville}</p>
       				    <br />
-      				    <p><span class="littleBig">Vendeur :</span>${ArticleVendu.pseudoVendeur}</p>
-      				
+      				   
+      				   	<c:choose>
+      				    	<c:when test="${utilisateur.pseudo eq ArticleVendu.pseudoVendeur}">
+      				   	 	<p><span class="littleBig">Vendeur : </span>${ArticleVendu.pseudoVendeur}</p>
+      						</c:when>
+      						<c:otherwise>
+      				   		<p><span class="littleBig">Vendeur : </span><a href="/Encheres/autre_profil?pseudo=${ArticleVendu.pseudoVendeur}">${ArticleVendu.pseudoVendeur}</a></p>
+      						</c:otherwise>
+      					</c:choose>
 						
 						<c:if test="${utilisateur.noUtilisateur > 0}">
       				

@@ -1,6 +1,8 @@
 package fr.eni.encheres.bll;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.DAOFactory;
@@ -86,5 +88,26 @@ public class UtilisateurManager {
 		return credit;
 	}
 	
+	public List<Utilisateur> selectionnerTous() {
+		
+		List<Utilisateur> listUtilisateur = new ArrayList<Utilisateur>();
+	
+		listUtilisateur = this.utilisateurDAO.SelectAllUtilisateur();
+
+		return listUtilisateur;
+	}
+	
+	public Utilisateur selectionnerParPseudo(String pseudo) {
+        Utilisateur currentUtilisateur = new Utilisateur();
+        currentUtilisateur.setPseudo(pseudo);
+
+        try {
+
+            currentUtilisateur = this.utilisateurDAO.selectUtilisateurByPseudo(currentUtilisateur);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return currentUtilisateur;
+    }
 	
 }

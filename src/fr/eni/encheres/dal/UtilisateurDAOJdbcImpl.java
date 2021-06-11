@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.encheres.bo.Utilisateur;
 
@@ -15,6 +17,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private static final String DELETEUTILISATEUR = "DELETE UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String UPDATECREDIT = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
 	private static final String SELECTCREDITUSER = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private static final String SELECTALLUTILISATEUR = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, credit FROM UTILISATEURS";
 	
 	@Override
 	public Utilisateur selectUtilisateurByPseudoAndPassword(Utilisateur user) throws SQLException {
@@ -304,4 +307,74 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 		return credit;
 	}
+
+	@Override
+	public List<Utilisateur> SelectAllUtilisateur() {
+		List<Utilisateur> listUtilisateur = new ArrayList<Utilisateur>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTALLUTILISATEUR);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Utilisateur currentUtilisateur = new Utilisateur();
+				
+				currentUtilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				currentUtilisateur.setPseudo(rs.getString("pseudo"));
+				currentUtilisateur.setNom(rs.getString("nom"));
+				currentUtilisateur.setPrenom(rs.getString("prenom"));
+				currentUtilisateur.setEmail(rs.getString("email"));
+				currentUtilisateur.setTelephone(rs.getInt("telephone"));
+				currentUtilisateur.setRue(rs.getString("rue"));
+				currentUtilisateur.setCodePostal(rs.getInt("code_postal"));
+				currentUtilisateur.setVille(rs.getString("ville"));
+				currentUtilisateur.setCredit(rs.getInt("credit"));
+				
+				listUtilisateur.add(currentUtilisateur);
+				
+			}
+			
+			pstmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return listUtilisateur;
+	}
+	
+	
+	@Override
+    public Utilisateur selectUtilisateurByPseudo(Utilisateur user) throws SQLException {
+        Utilisateur currentUtilisateur = new Utilisateur();
+
+        try (Connection cnx = ConnectionProvider.getConnection()){
+            PreparedStatement pstmt = cnx.prepareStatement(SELECTUTILISATEURBYPSEUDO);
+            pstmt.setString(1, user.getPseudo());
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                    currentUtilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+                    currentUtilisateur.setPseudo(rs.getString("pseudo"));
+                    currentUtilisateur.setNom(rs.getString("nom"));
+                    currentUtilisateur.setPrenom(rs.getString("prenom"));
+                    currentUtilisateur.setEmail(rs.getString("email"));
+                    currentUtilisateur.setTelephone(rs.getInt("telephone"));
+                    currentUtilisateur.setRue(rs.getString("rue"));
+                    currentUtilisateur.setCodePostal(rs.getInt("code_postal"));
+                    currentUtilisateur.setVille(rs.getString("ville"));
+
+                pstmt.close();
+                rs.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return currentUtilisateur;
+    }
 }
